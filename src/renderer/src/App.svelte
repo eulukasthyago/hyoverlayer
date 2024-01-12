@@ -9,6 +9,9 @@
   const handleCloseOverlay = (): void => {
     ipc.invoke('overlay', false)
   }
+  const handleEditOverlay = (): void => {
+    ipc.invoke('editoverlay', false)
+  }
 </script>
 
 <Container>
@@ -17,6 +20,8 @@
       <button on:click={handleOpenOverlay}>Open Overlayers</button>
       <br />
       <button on:click={handleCloseOverlay}>Close Overlayers</button>
+      <br />
+      <button on:click={handleEditOverlay}>Enable editable</button>
     </div>
   </div>
 </Container>

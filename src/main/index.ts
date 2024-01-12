@@ -15,13 +15,14 @@ function createWindow(): void {
       preload: join(__dirname, '../preload/index.js'),
       sandbox: false
     },
-    frame: false
+    frame: false,
+    hasShadow: false
   })
 
   const overlayWindow = new BrowserWindow({
     width: 900,
     height: 670,
-    // show: false,
+    show: false,
     autoHideMenuBar: false,
     ...(process.platform === 'linux' ? { icon } : {}),
     webPreferences: {
@@ -29,7 +30,8 @@ function createWindow(): void {
       sandbox: false
     },
     frame: false,
-    skipTaskbar: true
+    skipTaskbar: true,
+    hasShadow: false
   })
 
   overlayWindow.loadURL('https://google.com.br')
@@ -39,12 +41,11 @@ function createWindow(): void {
   ipcMain.handle('overlay', async (_, ...args) => {
     console.log(args)
     if (args[0]) {
-      // overlayWindow.show()
-      // overlayWindow.maximize()
-      overlayWindow.setSkipTaskbar(true)
+      overlayWindow.show()
+      overlayWindow.maximize()
     } else {
-      // overlayWindow.unmaximize()
-      // overlayWindow.hide()
+      overlayWindow.unmaximize()
+      overlayWindow.hide()
     }
   })
 
